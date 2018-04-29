@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ScienceGame</string>
+    <string name="username">Потребителско име</string>
+    <string name="password">Парола</string>
+    <string name="login_button">Вход</string>
+    <string name="login_not_registered">Нямаш регистрация?</string>
+    <string name="login_register">Регистрирай се</string>
 </resources>
