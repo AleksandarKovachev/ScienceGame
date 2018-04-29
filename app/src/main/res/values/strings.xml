@@ -5,4 +5,9 @@
     <string name="login_button">Вход</string>
     <string name="login_not_registered">Нямаш регистрация?</string>
     <string name="login_register">Регистрирай се</string>
+    <string name="progress_dialog_please_wait">Моля изчакайте!</string>
+    <string name="register_button">Регистрация</string>
+    <string name="login_from_register">Имаш регистрация?</string>
+    <string name="repeat_password">Повтори паролата</string>
+    <string name="menu_logout">Изход</string>
 </resources>

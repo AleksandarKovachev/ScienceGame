@@ -16,12 +16,12 @@ public class SharedPreferencesManager {
         this.sharedPreferences = context.getSharedPreferences(SharedPreferencesConstants.SHARED_PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    public void setLoginState(boolean loginState, String username, String password, Long userType) {
+    public void setLoginState(boolean loginState, String username, String password, int userType) {
         sharedPreferences.edit()
                 .putBoolean(SharedPreferencesConstants.IS_LOGIN, loginState)
                 .putString(SharedPreferencesConstants.USERNAME, username)
                 .putString(SharedPreferencesConstants.PASSWORD, password)
-                .putLong(SharedPreferencesConstants.USER_TYPE, userType)
+                .putInt(SharedPreferencesConstants.USER_TYPE, userType)
                 .apply();
     }
 
