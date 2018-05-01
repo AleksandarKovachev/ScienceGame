@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.tu.sofia.sciencegame.R;
+import com.tu.sofia.sciencegame.constant.RealmUtils;
 import com.tu.sofia.sciencegame.constant.UserTypes;
 import com.tu.sofia.sciencegame.entity.User;
 import com.tu.sofia.sciencegame.manager.DialogManager;
@@ -75,14 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (user != null) {
             DialogManager.showAlertDialog(RegisterActivity.this, "Неуспешно", "Вече съществува потребител с потребителското име " + username.getText().toString(), "Добре");
         } else {
-            Number currentIdNum = realm.where(User.class).max("id");
-            long nextId;
-            if(currentIdNum == null) {
-                nextId = 1;
-            } else {
-                nextId = currentIdNum.intValue() + 1;
-            }
-            User newUser = realm.createObject(User.class, nextId);
+            User newUser = realm.createObject(User.class, RealmUtils.getNextId(User.class, realm));
             newUser.setUsername(username.getText().toString());
             newUser.setPassword(password.getText().toString());
             newUser.setUserType(UserTypes.USER.getUserType());

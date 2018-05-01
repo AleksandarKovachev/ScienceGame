@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Aleksandar Kovachev on 01.05.2018 г..
  */
-public class MyQuestions extends Fragment {
+public class MyQuestionsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class MyQuestions extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-
 
         return root;
     }

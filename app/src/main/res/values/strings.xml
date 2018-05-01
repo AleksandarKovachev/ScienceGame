@@ -10,4 +10,10 @@
     <string name="login_from_register">Имаш регистрация?</string>
     <string name="repeat_password">Повтори паролата</string>
     <string name="menu_logout">Изход</string>
+    <string name="question">Въпрос</string>
+    <string name="questionDescription">Описание</string>
+    <string name="addQuestion">Добави въпрос</string>
+    <string name="total_answers">Избери брой отговори</string>
+    <string name="correct_answer">Верен отговор</string>
+    <string name="answer">Отговор %1$s</string>
 </resources>

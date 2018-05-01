@@ -20,7 +20,7 @@ public class Question extends RealmObject {
 
     private Answer correctAnswer;
 
-    private QuestionType questionType;
+    private int questionType;
 
     private boolean isApproved;
 
@@ -70,14 +70,6 @@ public class Question extends RealmObject {
         this.correctAnswer = correctAnswer;
     }
 
-    public QuestionType getQuestionType() {
-        return questionType;
-    }
-
-    public void setQuestionType(QuestionType questionType) {
-        this.questionType = questionType;
-    }
-
     public boolean isApproved() {
         return isApproved;
     }
@@ -108,5 +100,13 @@ public class Question extends RealmObject {
 
     public void setTotalAnswers(long totalAnswers) {
         this.totalAnswers = totalAnswers;
+    }
+
+    public int getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(int questionType) {
+        this.questionType = questionType;
     }
 }

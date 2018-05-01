@@ -11,10 +11,14 @@ import android.view.MenuItem;
 
 import com.roughike.bottombar.BottomBar;
 import com.tu.sofia.sciencegame.R;
-import com.tu.sofia.sciencegame.fragment.MyQuestions;
+import com.tu.sofia.sciencegame.constant.UserTypes;
+import com.tu.sofia.sciencegame.entity.User;
+import com.tu.sofia.sciencegame.fragment.AddQuestionFragment;
+import com.tu.sofia.sciencegame.fragment.MyQuestionsFragment;
 import com.tu.sofia.sciencegame.manager.SharedPreferencesManager;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by Aleksandar Kovachev on 29.04.2018 г..
@@ -28,7 +32,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Realm.init(getApplicationContext());
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().initialData(realm -> {
+            User user = new User();
+            user.setUserType(UserTypes.ADMIN.getUserType());
+            user.setUsername("admin");
+            user.setPassword("admin");
+        }).deleteRealmIfMigrationNeeded().name("realm.db").build();
+        Realm.setDefaultConfiguration(config);
 
         checkLogin();
 
@@ -41,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.home:
                     break;
                 case R.id.myQuestions:
-                    fragment = new MyQuestions();
+                    fragment = new MyQuestionsFragment();
                     title = "Моите въпроси";
                     break;
                 case R.id.suggestQuestion:
+                    fragment = new AddQuestionFragment();
+                    title = "Добави нов въпрос";
                     break;
             }
 
