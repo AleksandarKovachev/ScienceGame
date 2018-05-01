@@ -20,9 +20,6 @@ import io.realm.Realm;
  */
 public class RegisterActivity extends AppCompatActivity {
 
-    private Button loginButton;
-    private Button registerButton;
-
     private AppCompatEditText username;
     private AppCompatEditText password;
     private AppCompatEditText repeatPassword;
@@ -36,8 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        loginButton = findViewById(R.id.login_register_context_button);
-        registerButton = findViewById(R.id.register_button);
+        Button loginButton = findViewById(R.id.login_register_context_button);
+        Button registerButton = findViewById(R.id.register_button);
 
         username = findViewById(R.id.input_username);
         password = findViewById(R.id.input_password);

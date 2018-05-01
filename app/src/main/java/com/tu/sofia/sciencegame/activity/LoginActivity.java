@@ -21,8 +21,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferencesManager sharedPreferences;
 
-    private Button loginButton;
-    private Button registerButton;
     private AppCompatEditText username;
     private AppCompatEditText password;
 
@@ -33,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginButton = findViewById(R.id.login_button);
-        registerButton = findViewById(R.id.register_login_context_button);
+        Button loginButton = findViewById(R.id.login_button);
+        Button registerButton = findViewById(R.id.register_login_context_button);
 
         username = findViewById(R.id.input_username);
         password = findViewById(R.id.input_password);

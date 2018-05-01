@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.roughike.bottombar.BottomBar;
 import com.tu.sofia.sciencegame.R;
 import com.tu.sofia.sciencegame.manager.SharedPreferencesManager;
 
@@ -26,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
         Realm.init(getApplicationContext());
 
         checkLogin();
+
+        BottomBar bottomBar = findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(tabId -> {
+            switch (tabId) {
+                case R.id.home:
+                    break;
+                case R.id.myQuestions:
+                    break;
+                case R.id.suggestQuestion:
+                    break;
+            }
+        });
     }
 
     @Override

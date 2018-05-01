@@ -1,0 +1,17 @@
+<tabs>
+    <tab
+        badgeHidesWhenActive="true"
+        icon="@drawable/ic_home"
+        id="@+id/home"
+        title="Начало" />
+    <tab
+        badgeHidesWhenActive="true"
+        icon="@drawable/ic_question"
+        id="@+id/myQuestions"
+        title="Моите въпроси" />
+    <tab
+        badgeHidesWhenActive="true"
+        icon="@drawable/ic_write"
+        id="@+id/suggestQuestion"
+        title="Предложи въпрос" />
+</tabs>
