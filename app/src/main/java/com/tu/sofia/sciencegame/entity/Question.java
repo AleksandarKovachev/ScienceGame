@@ -24,7 +24,7 @@ public class Question extends RealmObject {
 
     private boolean isApproved;
 
-    private User fromUser;
+    private long userId;
 
     private long correctlyAnswered;
 
@@ -78,12 +78,12 @@ public class Question extends RealmObject {
         isApproved = approved;
     }
 
-    public User getFromUser() {
-        return fromUser;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setFromUser(User fromUser) {
-        this.fromUser = fromUser;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public long getCorrectlyAnswered() {

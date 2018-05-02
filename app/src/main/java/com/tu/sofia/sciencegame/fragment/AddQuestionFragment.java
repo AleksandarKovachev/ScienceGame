@@ -140,7 +140,7 @@ public class AddQuestionFragment extends Fragment {
         question.setQuestionType(count);
         question.setApproved(false);
         User user = realm.where(User.class).equalTo(SharedPreferencesConstants.USERNAME, sharedPreferencesManager.getString(SharedPreferencesConstants.USERNAME, null)).findFirst();
-        question.setFromUser(user);
+        question.setUserId(user.getId());
         realm.commitTransaction();
 
         DialogManager.showAlertDialog(getContext(), "Успешно", "Успешно добавяне на нов въпрос. Чака одобрение от администратор!", "Добре");
