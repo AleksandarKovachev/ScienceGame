@@ -14,6 +14,7 @@ import com.tu.sofia.sciencegame.R;
 import com.tu.sofia.sciencegame.constant.UserTypes;
 import com.tu.sofia.sciencegame.entity.User;
 import com.tu.sofia.sciencegame.fragment.AddQuestionFragment;
+import com.tu.sofia.sciencegame.fragment.HomeScreenFragment;
 import com.tu.sofia.sciencegame.fragment.MyQuestionsFragment;
 import com.tu.sofia.sciencegame.manager.SharedPreferencesManager;
 
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
             switch (tabId) {
                 case R.id.home:
+                    fragment = new HomeScreenFragment();
+                    title = "Начало";
                     break;
                 case R.id.myQuestions:
                     fragment = new MyQuestionsFragment();

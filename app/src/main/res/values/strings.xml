@@ -16,4 +16,5 @@
     <string name="total_answers">Избери брой отговори</string>
     <string name="correct_answer">Верен отговор</string>
     <string name="answer">Отговор %1$s</string>
+    <string name="play_game">Начало на играта</string>
 </resources>
