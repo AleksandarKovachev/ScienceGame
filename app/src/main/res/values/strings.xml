@@ -17,4 +17,9 @@
     <string name="correct_answer">Верен отговор</string>
     <string name="answer">Отговор %1$s</string>
     <string name="play_game">Начало на играта</string>
+    <string name="nextAnswer">Следващ</string>
+    <string name="correctAnswerDialog">Верен отговор!</string>
+    <string name="wrongAnswerDialog">Грешен отговор!</string>
+    <string name="questionNumber">%1$s / %2$s</string>
+    <string name="finishGame">Край на играта</string>
 </resources>

@@ -22,11 +22,15 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
 
     private List<Answer> answers;
     private Answer correctAnswer;
+    private View.OnClickListener correctClickListener;
+    private View.OnClickListener wrongClickListener;
 
-    public AnswerAdapter(Context context, List<Answer> answers, Answer correctAnswer) {
+    public AnswerAdapter(Context context, List<Answer> answers, Answer correctAnswer, View.OnClickListener correctClickListener, View.OnClickListener wrongClickListener) {
         this.context = context;
         this.answers = answers;
         this.correctAnswer = correctAnswer;
+        this.correctClickListener = correctClickListener;
+        this.wrongClickListener = wrongClickListener;
     }
 
     @Override
@@ -49,6 +53,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Answer answer = answers.get(position);
         holder.answerButton.setText(answer.getName());
+
+        if (answer.equals(correctAnswer)) {
+            holder.answerButton.setOnClickListener(correctClickListener);
+        } else {
+            holder.answerButton.setOnClickListener(wrongClickListener);
+        }
     }
 
     @Override
