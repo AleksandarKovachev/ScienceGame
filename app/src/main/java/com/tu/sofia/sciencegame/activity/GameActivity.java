@@ -11,11 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tu.sofia.sciencegame.R;
 import com.tu.sofia.sciencegame.adapter.AnswerAdapter;
+import com.tu.sofia.sciencegame.constant.RealmUtils;
+import com.tu.sofia.sciencegame.constant.SharedPreferencesConstants;
 import com.tu.sofia.sciencegame.entity.Answer;
 import com.tu.sofia.sciencegame.entity.Question;
+import com.tu.sofia.sciencegame.entity.Statistic;
+import com.tu.sofia.sciencegame.entity.User;
+import com.tu.sofia.sciencegame.manager.SharedPreferencesManager;
 
 import java.util.Collections;
 import java.util.List;
@@ -43,6 +49,8 @@ public class GameActivity extends AppCompatActivity {
     private int questionNumber;
     private int correctedAnswers;
 
+    private SharedPreferencesManager sharedPreferencesManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +62,20 @@ public class GameActivity extends AppCompatActivity {
         questionNumberTextView = findViewById(R.id.questionNumber);
         correctedAnswersTextView = findViewById(R.id.correctedAnswers);
 
+        sharedPreferencesManager = new SharedPreferencesManager(this);
+
         realm.beginTransaction();
         RealmResults<Question> questionsResults = realm.where(Question.class).findAll();
         questions = realm.copyFromRealm(questionsResults);
         realm.commitTransaction();
+
+        if(questions.size() == 0) {
+            Toast.makeText(this, "Няма налични въпроси за ирата!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
 
         question.setText(questions.get(questionNumber).getQuestion());
         updateTexts();
@@ -92,11 +110,22 @@ public class GameActivity extends AppCompatActivity {
 
     private View.OnClickListener correctOnClickListener = view -> {
         correctedAnswers++;
-        answerDialog(getString(R.string.correctAnswerDialog), questions.get(0));
+        realm.beginTransaction();
+        Question updateQuestion = questions.get(questionNumber);
+        updateQuestion.setCorrectlyAnswered(updateQuestion.getCorrectlyAnswered() + 1);
+        updateQuestion.setTotalAnswers(updateQuestion.getTotalAnswers() + 1);
+        realm.insertOrUpdate(updateQuestion);
+        realm.commitTransaction();
+        answerDialog(getString(R.string.correctAnswerDialog), questions.get(questionNumber));
     };
 
     private View.OnClickListener wrongOnClickListener = view -> {
-        answerDialog(getString(R.string.wrongAnswerDialog), questions.get(0));
+        realm.beginTransaction();
+        Question updateQuestion = questions.get(questionNumber);
+        updateQuestion.setTotalAnswers(updateQuestion.getTotalAnswers() + 1);
+        realm.insertOrUpdate(updateQuestion);
+        realm.commitTransaction();
+        answerDialog(getString(R.string.wrongAnswerDialog), questions.get(questionNumber));
     };
 
     public void answerDialog(String status, Question question) {
@@ -127,7 +156,16 @@ public class GameActivity extends AppCompatActivity {
         buttonNext.setOnClickListener(view -> {
             dialogCorrect.dismiss();
             if (questionNumber == questions.size()) {
-                Intent intent = new Intent(this, LoginActivity.class);
+
+                realm.beginTransaction();
+                User user = realm.where(User.class).equalTo(SharedPreferencesConstants.USERNAME, sharedPreferencesManager.getString(SharedPreferencesConstants.USERNAME, null)).findFirst();
+                Statistic statistic = realm.createObject(Statistic.class, RealmUtils.getNextId(Statistic.class, realm));
+                statistic.setCorrectedAnswers(correctedAnswers);
+                statistic.setTotalAnswers(questions.size());
+                statistic.setUser(user);
+                realm.commitTransaction();
+
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } else {

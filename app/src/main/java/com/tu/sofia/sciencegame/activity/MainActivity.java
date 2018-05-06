@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.roughike.bottombar.BottomBar;
 import com.tu.sofia.sciencegame.R;
+import com.tu.sofia.sciencegame.constant.RealmUtils;
 import com.tu.sofia.sciencegame.constant.UserTypes;
 import com.tu.sofia.sciencegame.entity.User;
 import com.tu.sofia.sciencegame.fragment.AddQuestionFragment;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().initialData(realm -> {
-            User user = new User();
+            User user = realm.createObject(User.class, RealmUtils.getNextId(User.class, realm));
             user.setUserType(UserTypes.ADMIN.getUserType());
             user.setUsername("admin");
             user.setPassword("admin");
