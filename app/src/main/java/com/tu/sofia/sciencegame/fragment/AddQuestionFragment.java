@@ -135,6 +135,7 @@ public class AddQuestionFragment extends Fragment {
             }
 
             i++;
+            answers.setText("");
         }
         question.setWrongAnswers(answerList);
         question.setQuestionType(count);
@@ -142,6 +143,12 @@ public class AddQuestionFragment extends Fragment {
         User user = realm.where(User.class).equalTo(SharedPreferencesConstants.USERNAME, sharedPreferencesManager.getString(SharedPreferencesConstants.USERNAME, null)).findFirst();
         question.setUserId(user.getId());
         realm.commitTransaction();
+
+        count = 0;
+        spinner.setSelection(0);
+        this.question.setText("");
+        this.description.setText("");
+        answerList.clear();
 
         DialogManager.showAlertDialog(getContext(), "Успешно", "Успешно добавяне на нов въпрос. Чака одобрение от администратор!", "Добре");
     };

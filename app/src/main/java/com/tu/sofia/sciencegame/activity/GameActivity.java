@@ -23,6 +23,7 @@ import com.tu.sofia.sciencegame.entity.Statistic;
 import com.tu.sofia.sciencegame.entity.User;
 import com.tu.sofia.sciencegame.manager.SharedPreferencesManager;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -69,6 +70,8 @@ public class GameActivity extends AppCompatActivity {
         questions = realm.copyFromRealm(questionsResults);
         realm.commitTransaction();
 
+        Collections.shuffle(questions);
+
         if(questions.size() == 0) {
             Toast.makeText(this, "Няма налични въпроси за ирата!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
@@ -102,7 +105,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private List<Answer> getAnswers() {
-        List<Answer> answers = questions.get(questionNumber).getWrongAnswers();
+        List<Answer> answers = new ArrayList<>(questions.get(questionNumber).getWrongAnswers());
         answers.add(questions.get(questionNumber).getCorrectAnswer());
         Collections.shuffle(answers);
         return answers;
@@ -156,7 +159,6 @@ public class GameActivity extends AppCompatActivity {
         buttonNext.setOnClickListener(view -> {
             dialogCorrect.dismiss();
             if (questionNumber == questions.size()) {
-
                 realm.beginTransaction();
                 User user = realm.where(User.class).equalTo(SharedPreferencesConstants.USERNAME, sharedPreferencesManager.getString(SharedPreferencesConstants.USERNAME, null)).findFirst();
                 Statistic statistic = realm.createObject(Statistic.class, RealmUtils.getNextId(Statistic.class, realm));
