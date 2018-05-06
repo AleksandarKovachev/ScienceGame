@@ -32,6 +32,11 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".activity.StatisticActivity"
+            android:theme="@style/MaterialTheme"
+            android:windowSoftInputMode="stateHidden" />
+
     </application>
 
 </manifest>

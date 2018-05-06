@@ -22,4 +22,5 @@
     <string name="wrongAnswerDialog">Грешен отговор!</string>
     <string name="questionNumber">%1$s / %2$s</string>
     <string name="finishGame">Край на играта</string>
+    <string name="statisticButton">Статистика</string>
 </resources>
