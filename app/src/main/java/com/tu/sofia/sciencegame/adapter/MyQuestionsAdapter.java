@@ -60,9 +60,9 @@ public class MyQuestionsAdapter extends RecyclerView.Adapter<MyQuestionsAdapter.
         holder.totalAnswers.setText(String.valueOf(question.getTotalAnswers()));
 
         if (question.isApproved()) {
-            holder.questionState.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_approoved));
+            holder.questionState.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_approved));
         } else {
-            holder.questionState.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_not_approoved));
+            holder.questionState.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_not_approved));
         }
 
     }

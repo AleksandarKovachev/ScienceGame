@@ -66,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
         sharedPreferencesManager = new SharedPreferencesManager(this);
 
         realm.beginTransaction();
-        RealmResults<Question> questionsResults = realm.where(Question.class).findAll();
+        RealmResults<Question> questionsResults = realm.where(Question.class).equalTo("isApproved", true).findAll();
         questions = realm.copyFromRealm(questionsResults);
         realm.commitTransaction();
 
