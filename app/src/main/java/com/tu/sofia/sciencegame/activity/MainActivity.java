@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import com.roughike.bottombar.BottomBar;
 import com.tu.sofia.sciencegame.R;
 import com.tu.sofia.sciencegame.constant.RealmUtils;
+import com.tu.sofia.sciencegame.constant.SharedPreferencesConstants;
 import com.tu.sofia.sciencegame.constant.UserTypes;
 import com.tu.sofia.sciencegame.entity.User;
 import com.tu.sofia.sciencegame.fragment.AddQuestionFragment;
+import com.tu.sofia.sciencegame.fragment.ApproveQuestionsFragment;
 import com.tu.sofia.sciencegame.fragment.HomeScreenFragment;
 import com.tu.sofia.sciencegame.fragment.MyQuestionsFragment;
 import com.tu.sofia.sciencegame.manager.SharedPreferencesManager;
@@ -46,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         checkLogin();
 
         BottomBar bottomBar = findViewById(R.id.bottomBar);
+
+        User user;
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        user = realm.copyFromRealm(realm.where(User.class).equalTo(SharedPreferencesConstants.USERNAME, sharedPreferences.getString(SharedPreferencesConstants.USERNAME, null)).findFirst());
+        realm.commitTransaction();
+
         bottomBar.setOnTabSelectListener(tabId -> {
             Fragment fragment = null;
             String title = null;
@@ -56,8 +66,13 @@ public class MainActivity extends AppCompatActivity {
                     title = "Начало";
                     break;
                 case R.id.myQuestions:
-                    fragment = new MyQuestionsFragment();
-                    title = "Моите въпроси";
+                    if(user.getUserType() == UserTypes.USER.getUserType()) {
+                        fragment = new MyQuestionsFragment();
+                        title = "Моите въпроси";
+                    } else {
+                        fragment = new ApproveQuestionsFragment();
+                        title = "Одобряване на въпроси";
+                    }
                     break;
                 case R.id.suggestQuestion:
                     fragment = new AddQuestionFragment();
