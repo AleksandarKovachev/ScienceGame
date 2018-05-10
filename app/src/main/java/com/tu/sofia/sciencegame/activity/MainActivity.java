@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
         }).deleteRealmIfMigrationNeeded().name("realm.db").build();
         Realm.setDefaultConfiguration(config);
 
-        checkLogin();
+        if(!checkLogin()){
+            return;
+        }
 
         BottomBar bottomBar = findViewById(R.id.bottomBar);
 
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private void checkLogin() {
+    private boolean checkLogin() {
         sharedPreferences = new SharedPreferencesManager(getApplicationContext());
         boolean isUserLoggedIn = sharedPreferences.getLoginState();
 
@@ -141,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
+            return false;
         }
+        return true;
     }
 
 }
